@@ -43,9 +43,13 @@ void complexRec(int n)
 
 int main()
 {
+    
     int n;
     cin>>n;
     complexRec(n);
     cout << "Max recursion depth: " << maxDepth << endl;
     return 0;
 }
+
+// Recureence relation: 3T(n)/2 + O(nlogn)
+//     Time Complexity: O(n^log_base2^3)

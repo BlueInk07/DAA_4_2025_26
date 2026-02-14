@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int dx[8] = {2,1,-1,-2,-2,-1,1,2};
+int dy[8] = {1,2,2,1,-1,-2,-2,-1};
+
+bool valid(int x, int y, vector<vector<int>>& board, int n) {
+    return x >= 0 && y >= 0 && x < n && y < n && board[x][y] == -1;
+}
+
+bool moveKnight(int x, int y, int step, vector<vector<int>>& board, int n) {
+    if (step == n * n)
+        return true;
+
+    for (int i = 0; i < 8; i++) {
+        int nx = x + dx[i];
+        int ny = y + dy[i];
+
+        if (valid(nx, ny, board, n)) {
+            board[nx][ny] = step;
+
+            if (moveKnight(nx, ny, step + 1, board, n))
+                return true;
+
+            board[nx][ny] = -1;
+        }
+    }
+    return false;
+}
+
+int main() {
+    int n = 5;
+    vector<vector<int>> board(n, vector<int>(n, -1));
+
+    board[0][0] = 0;
+
+    if (moveKnight(0, 0, 1, board, n)) {
+        for (auto r : board) {
+            for (int x : r)
+                cout << x << " ";
+            cout << endl;
+        }
+    } else {
+        cout << "No solution";
+    }
+}
